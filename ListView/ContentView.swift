@@ -9,16 +9,45 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        FirstView()
+    }
+}
+
+struct FirstView: View {
+    var body: some View {
+        NavigationStack {
+            List {
+                ForEach(ExampleTask().tasklist, id: \.self) { task in
+                        Text(task)
+                }
+            }
+            .navigationTitle("Task List")
         }
         .padding()
     }
 }
+struct SecondView: View {
+    @State var task: String = ""
+    
+    var body: some View {
+          TextField("Enter your task", text: $task)
+              .textFieldStyle(.roundedBorder)
+              .padding()
+        Button {
+            //
+        } label: {
+            Text("Add")
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(.orange)
+        .padding()
+        
+        Spacer()
+        
+        
+    }
+}
 
-#Preview {
-    ContentView()
+#Preview("SecondView") {
+    SecondView()
 }
