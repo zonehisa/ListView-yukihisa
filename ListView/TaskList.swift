@@ -18,7 +18,7 @@ struct ExampleTask {
     ]
 }
 
-struct Task: Codable {
+struct Task: Codable, Identifiable {
     var id = UUID()
     var taskItem: String
 }
