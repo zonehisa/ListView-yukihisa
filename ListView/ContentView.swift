@@ -15,7 +15,6 @@ struct ContentView: View {
 
 struct FirstView: View {
       @AppStorage("TasksData") private var tasksData = Data()
-      // タスクを入れておくための配列
       @State var tasksArray: [Task] = []
     
     init() {
@@ -38,6 +37,12 @@ struct FirstView: View {
                 }
                 .onMove(perform: { from, to in
                     replaceRow(from, to)
+                })
+                .onDelete(perform: {tasks in
+                    tasksArray.remove(atOffsets: tasks)
+                    if let encodedArray = try? JSONEncoder().encode(tasksArray) {
+                        tasksData = encodedArray
+                    }
                 })
             }
             .navigationTitle("Task List")
