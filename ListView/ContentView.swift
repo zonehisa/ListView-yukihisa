@@ -14,8 +14,8 @@ struct ContentView: View {
 }
 
 struct FirstView: View {
-      @AppStorage("TasksData") private var tasksData = Data()
-      @State var tasksArray: [Task] = []
+    @AppStorage("TasksData") private var tasksData = Data()
+    @State var tasksArray: [Task] = []
     
     init() {
         if let decodedTasks = try? JSONDecoder().decode([Task].self, from: tasksData) {
@@ -73,9 +73,9 @@ struct SecondView: View {
     @Binding var tasksArray: [Task]
     
     var body: some View {
-          TextField("Enter your task", text: $task)
-              .textFieldStyle(.roundedBorder)
-              .padding()
+        TextField("Enter your task", text: $task)
+            .textFieldStyle(.roundedBorder)
+            .padding()
         Button {
             addTask(newTask: task)
             task = ""
