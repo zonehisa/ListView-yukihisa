@@ -57,8 +57,11 @@ struct FirstView: View {
         }
     }
     func deleteRow(_ tasks: IndexSet) {
+        let originalTasksArray = tasksArray
         tasksArray.remove(atOffsets: tasks)
+        
         if let encodedArray = try? JSONEncoder().encode(tasksArray) {
+            UserDefaults.standard.set(encodedArray, forKey: "TasksData")
             tasksData = encodedArray
         }
     }
