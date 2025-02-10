@@ -39,10 +39,7 @@ struct FirstView: View {
                     replaceRow(from, to)
                 })
                 .onDelete(perform: {tasks in
-                    tasksArray.remove(atOffsets: tasks)
-                    if let encodedArray = try? JSONEncoder().encode(tasksArray) {
-                        tasksData = encodedArray
-                    }
+                    deleteRow(tasks)
                 })
             }
             .navigationTitle("Task List")
@@ -55,6 +52,12 @@ struct FirstView: View {
     }
     func replaceRow(_ from: IndexSet, _ to: Int) {
         tasksArray.move(fromOffsets: from, toOffset: to)
+        if let encodedArray = try? JSONEncoder().encode(tasksArray) {
+            tasksData = encodedArray
+        }
+    }
+    func deleteRow(_ tasks: IndexSet) {
+        tasksArray.remove(atOffsets: tasks)
         if let encodedArray = try? JSONEncoder().encode(tasksArray) {
             tasksData = encodedArray
         }
